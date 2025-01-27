@@ -25,6 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
   border: 1px solid black;
 }
 .menu-item .content .title {
