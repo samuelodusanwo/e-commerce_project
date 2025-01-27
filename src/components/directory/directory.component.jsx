@@ -10,7 +10,6 @@ export class Directory extends React.Component {
             sections: [{
                 title: 'hats',
                 imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-                // imageUrl: 'https://www.pexels.com/photo/a-woman-with-facial-cream-on-face-5927813/',
                 id: 1,
             },
             {
@@ -43,7 +42,7 @@ export class Directory extends React.Component {
             <div className="directory-menu">
                 {
                     this.state.sections.map(({title, imageUrl, id, size}) => (
-                        <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+                        <MenuItem title={title} key={id} imageUrl={imageUrl} size={size} />    
                     ))
                 }
             </div>
