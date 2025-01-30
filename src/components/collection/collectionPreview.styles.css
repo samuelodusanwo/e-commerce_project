@@ -1,3 +1,18 @@
-.name-amount {
+.collection-preview {
   display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.collection-preview .title {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+.collection-preview .preview {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1em;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }/*# sourceMappingURL=collectionPreview.styles.css.map */
