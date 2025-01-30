@@ -9,7 +9,7 @@ class ShopPage extends React.Component {
                 {
                     id: 1,
                     title: 'Hats',
-                    routeName: 'hats',
+                    routeName: '/hats',
                     items: [
                       {
                         id: 1,
@@ -70,7 +70,7 @@ class ShopPage extends React.Component {
                   {
                     id: 2,
                     title: 'Sneakers',
-                    routeName: 'sneakers',
+                    routeName: '/sneakers',
                     items: [
                       {
                         id: 1,
@@ -125,7 +125,7 @@ class ShopPage extends React.Component {
                   {
                     id: 3,
                     title: 'Jackets',
-                    routeName: 'jackets',
+                    routeName: '/jackets',
                     items: [
                       {
                         id: 1,
@@ -162,7 +162,7 @@ class ShopPage extends React.Component {
                   {
                     id: 4,
                     title: 'Womens',
-                    routeName: 'womens',
+                    routeName: '/womens',
                     items: [
                       {
                         id: 1,
@@ -211,7 +211,7 @@ class ShopPage extends React.Component {
                   {
                     id: 5,
                     title: 'Mens',
-                    routeName: 'mens',
+                    routeName: '/mens',
                     items: [
                       {
                         id: 1,
