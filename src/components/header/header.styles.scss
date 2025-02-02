@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    height: 70px;
+    width: 100%;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: space-between;
+    border: solid red;
+
+    .logo-container {
+        height: 100%;
+        width: 70px;
+        padding: 25px;
+        border: solid blue;
+    }
+
+    .options {
+        display: flex;
+        width: 50%;
+        height: 100%;
+        gap: 1em;
+        align-items: center;
+        justify-content: flex-end;
+        border: solid red;
+
+        .option {
+            padding: 10px 15px;
+        }
+    }
+}

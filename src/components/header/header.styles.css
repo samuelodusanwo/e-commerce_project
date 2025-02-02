@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 25px;
+  align-items: center;
+  justify-content: space-between;
+  border: solid red;
+}
+.header .logo-container {
+  height: 100%;
+  width: 70px;
+  padding: 25px;
+  border: solid blue;
+}
+.header .options {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  gap: 1em;
+  align-items: center;
+  justify-content: flex-end;
+  border: solid red;
+}
+.header .options .option {
+  padding: 10px 15px;
+}/*# sourceMappingURL=header.styles.css.map */
