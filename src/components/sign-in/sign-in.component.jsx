@@ -29,7 +29,7 @@ class SignIn extends React.Component {
                     <input type="password" name="password" value={this.state.password} required />
                     <label>Password</label>
 
-                    <input type="submut" value="Submit Form" />
+                    <input type="submit" value="Submit Form" />
                 </form>
             </div>
         )
