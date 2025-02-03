@@ -7,7 +7,7 @@ const SignInAndSignUp = () => (
         <h1>
             Sign in and Sign up Page
         </h1>
-
+        
         <SignIn/>
     </div>
 )
