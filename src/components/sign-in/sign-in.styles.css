@@ -2,7 +2,6 @@
   width: 450px;
   display: flex;
   flex-direction: column;
-  border: solid red;
 }
 .sign-in .title {
   margin: 3 0px 0px;
