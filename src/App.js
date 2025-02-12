@@ -6,6 +6,7 @@ import SignInAndSignUp from './page/sign-in-and-sign-up/sign-in-and-sign-up.comp
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import Header from './components/header/header.component';
 import './App.scss';
+import { onSnapshot } from 'firebase/firestore';
 
 class App extends React.Component {
   constructor() {
@@ -23,12 +24,14 @@ class App extends React.Component {
       this.setState({currentUser: userAuth})
       createUserProfileDocument(userAuth)
 
-      if (userAuth){
-        const userRef = createUserProfileDocument(userAuth)
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
 
-        userRef.onSnapshot((snapshot) => {
-          console.log(snapshot);
-        })
+        if (userRef) {
+          onSnapshot(userRef, (snapshot) => {
+            console.log(snapshot.data())
+          })
+        }
       }
     })
   }
