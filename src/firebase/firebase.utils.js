@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
@@ -41,13 +41,6 @@ export const createUserProfileDocument = async (userAuth, ...additionalData) => 
         }
     }
 }
-
-
-
-
-
-
-
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
