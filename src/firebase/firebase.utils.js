@@ -1,9 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
-const config = {
+const app = {
     apiKey: "AIzaSyCMhhfLogvQd4ngS6JgzUXgZUOQvJDD38k",
     authDomain: "crwn-db-953c7.firebaseapp.com",
     projectId: "crwn-db-953c7",
@@ -13,21 +12,20 @@ const config = {
     measurementId: "G-4E90TQ6YXN"
 };
 
-const app = initializeApp(config);
+initializeApp(app);
+export const firestore = getFirestore();
+export const auth = getAuth();
 
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
-
-export const createUserProfileDocument = async (userAuth, ...additionalData) => {
-    if (!userAuth)return;
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return null;
 
     const userRef = doc(firestore, `users/${userAuth.uid}`);
     const snapShot = await getDoc(userRef);
-    const createdAt = new Date()
-    console.log(snapShot)
+
 
     if (!snapShot.exists()){
         const { displayName, email } = userAuth;
+        const createdAt = new Date();
 
         try {
             await setDoc(userRef, {
@@ -36,12 +34,12 @@ export const createUserProfileDocument = async (userAuth, ...additionalData) => 
                 createdAt,
                 ...additionalData
             })
+            console.log("User successfully created!")
         } catch (error) {
-            console.log('error creating user', error.message);
+            console.log("error created user:", error.message);
         }
     }
 
-    return userRef;
 }
 
 const provider = new GoogleAuthProvider();

@@ -3,10 +3,10 @@ import { Routes, Route} from 'react-router-dom';
 import HomePage from './page/homepage/homepage.component';
 import ShopPage from './page/shop/shop.component';
 import SignInAndSignUp from './page/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { onSnapshot } from 'firebase/firestore';
 import Header from './components/header/header.component';
 import './App.scss';
-import { onSnapshot } from 'firebase/firestore';
 
 class App extends React.Component {
   constructor() {
@@ -25,16 +25,37 @@ class App extends React.Component {
       createUserProfileDocument(userAuth)
 
       if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth)
+        const userRef = await createUserProfileDocument(userAuth);
 
         if (userRef) {
           onSnapshot(userRef, (snapshot) => {
-            console.log(snapshot.data())
+            console.log(snapshot.data());
           })
         }
       }
+
     })
   }
+
+  // componentDidMount() {
+  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //     this.setState({ currentUser: userAuth });
+
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+
+  //       if (userRef) {
+  //         onSnapshot(userRef, (snapshot) => {
+  //           if (snapshot.exists()) {
+  //             console.log("User Data:", snapshot.data());
+  //           } else {
+  //             console.log("No such document!");
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
