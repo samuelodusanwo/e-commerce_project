@@ -3,9 +3,9 @@ import { Routes, Route} from 'react-router-dom';
 import HomePage from './page/homepage/homepage.component';
 import ShopPage from './page/shop/shop.component';
 import SignInAndSignUp from './page/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { onSnapshot } from 'firebase/firestore';
 import Header from './components/header/header.component';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { onSnapshot } from 'firebase/firestore';
 import './App.scss';
 
 class App extends React.Component {
@@ -17,29 +17,58 @@ class App extends React.Component {
     }
   }
 
-  unsubscribeFromAuth = null;
+  // unsubscribeFromAuth = null;
  
-  componentDidMount() {
+  // componentDidMount() {
+  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  //     this.setState({currentUser: userAuth})
+  //     createUserProfileDocument(userAuth)
+
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+
+  //       if (userRef) {
+  //         onSnapshot(userRef, (snapshot) => {
+  //           console.log(snapshot.data());
+  //         })
+  //       }
+  //     }
+
+  //   })
+  // }
+
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
+
+  unsubscribeFromAuth = null
+
+  componentDidMount (){
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      this.setState({currentUser: userAuth})
-      createUserProfileDocument(userAuth)
 
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         if (userRef) {
           onSnapshot(userRef, (snapshot) => {
-            console.log(snapshot.data());
+            this.setState({currentUser: {
+              id: snapshot.id,
+              ...snapshot.data()
+            }}, () => {
+              console.log(this.state);
+            })
           })
         }
       }
-
-    })
+      this.setState({currentUser: null});
+    });
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+  componentWillUnmount (){
+    this.unsubscribeFromAuth()
   }
+
+
 
   render() {
     return (
