@@ -39,7 +39,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
             console.log("error created user:", error.message);
         }
     }
-
+    return userRef;
 }
 
 const provider = new GoogleAuthProvider();
