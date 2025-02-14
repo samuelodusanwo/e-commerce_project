@@ -17,39 +17,15 @@ class App extends React.Component {
     }
   }
 
-  // unsubscribeFromAuth = null;
- 
-  // componentDidMount() {
-  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-  //     this.setState({currentUser: userAuth})
-  //     createUserProfileDocument(userAuth)
-
-  //     if (userAuth) {
-  //       const userRef = await createUserProfileDocument(userAuth);
-
-  //       if (userRef) {
-  //         onSnapshot(userRef, (snapshot) => {
-  //           console.log(snapshot.data());
-  //         })
-  //       }
-  //     }
-
-  //   })
-  // }
-
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
-
   unsubscribeFromAuth = null
 
   componentDidMount (){
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
-      if (userAuth) {
+      if (userAuth){
         const userRef = await createUserProfileDocument(userAuth);
 
-        if (userRef) {
+        if (userRef){
           onSnapshot(userRef, (snapshot) => {
             this.setState({currentUser: {
               id: snapshot.id,
@@ -60,15 +36,13 @@ class App extends React.Component {
           })
         }
       }
-      this.setState({currentUser: null});
+      this.setState({currentUser: userAuth});
     });
   }
 
   componentWillUnmount (){
     this.unsubscribeFromAuth()
   }
-
-
 
   render() {
     return (
