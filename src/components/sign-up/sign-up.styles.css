@@ -1,8 +1,8 @@
-.sign-in {
+.sign-up {
   display: flex;
   flex-direction: column;
   width: 380px;
 }
-.sign-in .title {
+.sign-up .title {
   margin: 10px 0px;
 }/*# sourceMappingURL=sign-up.styles.css.map */
