@@ -15,6 +15,9 @@ const firebaseConfig = {            //firebase configuration file
 // initialize app
 const app = initializeApp(firebaseConfig);
 
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+
 // save infomation on db
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return null;     // if userAuth is empty
@@ -35,15 +38,12 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
             })
             console.log("Successfully created user")
         } catch(error) {
-            console.log("error creating user!", error.message);
+            console.error("error creating user!", error.message);
         }
     }
 
     return userRef;
 }
-
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
