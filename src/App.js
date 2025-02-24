@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import HomePage from './page/homepage/homepage.component';
 import ShopPage from './page/shop/shop.component';
 import SignInAndSignUp from './page/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -14,7 +14,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount (){
-    const {setCurrentUser } = this.props;
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
       if (userAuth) {
@@ -28,8 +28,9 @@ class App extends React.Component {
             });
           });
         }
-      }
-      setCurrentUser (userAuth);
+      } else {
+          setCurrentUser (null); // Fix state when user logs out
+        }
     });
   }
 
@@ -44,15 +45,19 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path='/sign-in' element={<SignInAndSignUp />} />
+          <Route path='/sign-in' element={this.props.currentUser ? <Navigate to="/" /> : <SignInAndSignUp /> } />
         </Routes>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

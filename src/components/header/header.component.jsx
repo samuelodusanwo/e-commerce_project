@@ -5,26 +5,35 @@ import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.styles.scss';
 
-const Header = ({currentUser}) => (
-    <div className='header'>
-        <Link className='logo-container' to='/'>
-            <Logo className='logo'/>
-        </Link>
-        <div className='options'>
-            <Link className='option' to='/shop'>Shop</Link>
-            <Link className='option' to='/contact'>Contact</Link>
-            {
-                currentUser ?
-                    <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
-                :
-                    <Link className='option' to='/sign-in'>SIGN IN</Link>
-            }
+const Header = ({currentUser}) => {
+    const handleSubmit = async () => {
+        try {
+            await auth.signOut()
+        } catch (error) {
+            console.error("error signing out:", error.message)
+        }
+    }
+    return (
+        <div className='header'>
+            <Link className='logo-container' to='/'>
+                <Logo className='logo'/>
+            </Link>
+            <div className='options'>
+                <Link className='option' to='/shop'>Shop</Link>
+                <Link className='option' to='/contact'>Contact</Link>
+                {
+                    currentUser ?
+                        <div className='option' onClick={handleSubmit}>SIGN OUT</div>
+                    :
+                        <Link className='option' to='/sign-in'>SIGN IN</Link>
+                }
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 const mapStateToProps = state => ({
-    currentUser: state.user.userReducer
+    currentUser: state.user.currentUser
 })
 
 export default connect(mapStateToProps)(Header);
