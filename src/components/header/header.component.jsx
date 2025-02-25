@@ -7,7 +7,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import './header.styles.scss';
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser, hidden}) => {
     const handleSubmit = async () => {
         try {
             await auth.signOut()
@@ -15,6 +15,7 @@ const Header = ({currentUser}) => {
             console.error("error signing out:", error.message)
         }
     }
+
     return (
         <div className='header'>
             <Link className='logo-container' to='/'>
@@ -28,18 +29,21 @@ const Header = ({currentUser}) => {
                         <div className='option' onClick={handleSubmit}>SIGN OUT</div>
                     :
                         <Link className='option' to='/sign-in'>SIGN IN</Link>
-                }
+                } 
                 <Link>
-                    <CartIcon/>
-                    <CartDropdown/>
+                    <CartIcon />
+                    {
+                        hidden ? null : <CartDropdown />
+                    }
                 </Link>
             </div>
         </div>
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
+    currentUser,
+    hidden
 })
 
 export default connect(mapStateToProps)(Header);
