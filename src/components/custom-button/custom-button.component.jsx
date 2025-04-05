@@ -19,4 +19,3 @@ const CustomButton = ({children, onClick, isGoogleSignIn, ...otherProps}) => (
     </button>
 )
 
-
