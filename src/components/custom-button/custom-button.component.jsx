@@ -40,5 +40,3 @@ const CustomButton = ({children, onClick, isGoogleSignIn, ...otherProps}) => (
         {children}
     </button>
 )
-
-export default CustomButton;
