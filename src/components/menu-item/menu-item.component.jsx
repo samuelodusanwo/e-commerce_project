@@ -634,3 +634,5 @@ export const MenuItem = ({title, imageUrl, size, linkUrl}) => {
         </div>
     )
 }
+
+export default MenuItem;
