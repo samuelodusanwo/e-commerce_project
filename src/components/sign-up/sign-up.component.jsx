@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './sign-up.styles.scss';
 
 class SignUp extends React.Component{
-    constructor (){
+    constructor (){a
         super();
 
         this.state = {
